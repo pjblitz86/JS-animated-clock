@@ -1,3 +1,4 @@
+const canvas = document.getElementById('canvas');
 const faceColor = document.getElementById('face-color');
 const borderColor = document.getElementById('border-color');
 const lineColor = document.getElementById('line-color');
@@ -6,7 +7,6 @@ const secondHandColor = document.getElementById('second-hand-color');
 
 function clock() {
   const now = new Date();
-  const canvas = document.getElementById('canvas');
   const ctx = canvas.getContext('2d');
 
   // Setup canvas
@@ -112,3 +112,11 @@ function clock() {
 }
 
 requestAnimationFrame(clock);
+
+document.getElementById('save-btn').addEventListener('click', () => {
+  const dataURL = canvas.toDataURL('image/png');
+  const link = document.createElement('a');
+  link.download = 'clock.png';
+  link.href = dataURL;
+  link.click();
+});
